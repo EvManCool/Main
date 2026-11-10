@@ -1,6 +1,6 @@
 /**
- * AETHER // Kinetic Interface Laboratory
- * Core Interaction, Particle Canvas & Web Audio Synthesis Engine
+ * EvManCool // Minimalist Kinetic Portal
+ * Liquid Mercury Dynamics & Quantum Crystal Audio Synthesis Engine
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -9,8 +9,6 @@ document.addEventListener('DOMContentLoaded', () => {
   // State Management
   const state = {
     audioEnabled: true,
-    totalInteractions: 0,
-    lastActivated: null,
     currentThemeIndex: 0,
     themes: [
       { name: 'Aurora', class: '' },
@@ -21,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   /* ==========================================================================
-     1. Web Audio API Synthesizer (Pure Mathematical Sound FX)
+     1. Web Audio API Synthesizer (Quantum Shard Crystalline Harmonic Engine)
      ========================================================================== */
   let audioCtx = null;
 
@@ -38,115 +36,35 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   const SoundEngine = {
-    // 01. Cyber Laser Chirp (Zap & Glitch)
-    playCyber() {
-      if (!state.audioEnabled || !audioCtx) return;
-      try {
-        const now = audioCtx.currentTime;
-        const osc = audioCtx.createOscillator();
-        const gain = audioCtx.createGain();
-
-        osc.type = 'sawtooth';
-        osc.frequency.setValueAtTime(880, now);
-        osc.frequency.exponentialRampToValueAtTime(140, now + 0.18);
-
-        gain.gain.setValueAtTime(0.18, now);
-        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.18);
-
-        osc.connect(gain);
-        gain.connect(audioCtx.destination);
-
-        osc.start(now);
-        osc.stop(now + 0.19);
-      } catch (e) {
-        console.warn('Audio error:', e);
-      }
-    },
-
-    // 02. Liquid Droplet / Bubble Squish
-    playLiquid() {
-      if (!state.audioEnabled || !audioCtx) return;
-      try {
-        const now = audioCtx.currentTime;
-        const osc = audioCtx.createOscillator();
-        const gain = audioCtx.createGain();
-
-        osc.type = 'sine';
-        osc.frequency.setValueAtTime(320, now);
-        osc.frequency.exponentialRampToValueAtTime(740, now + 0.08);
-        osc.frequency.exponentialRampToValueAtTime(260, now + 0.22);
-
-        gain.gain.setValueAtTime(0.22, now);
-        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.22);
-
-        osc.connect(gain);
-        gain.connect(audioCtx.destination);
-
-        osc.start(now);
-        osc.stop(now + 0.23);
-      } catch (e) {
-        console.warn('Audio error:', e);
-      }
-    },
-
-    // 03. Warp Speed Sub-Bass & Saw Arpeggio
-    playWarp() {
+    playQuantumCrystal(chordIndex = 0) {
       if (!state.audioEnabled || !audioCtx) return;
       try {
         const now = audioCtx.currentTime;
         
-        // Sub-bass thud
-        const sub = audioCtx.createOscillator();
-        const subGain = audioCtx.createGain();
-        sub.type = 'triangle';
-        sub.frequency.setValueAtTime(160, now);
-        sub.frequency.exponentialRampToValueAtTime(45, now + 0.25);
-        subGain.gain.setValueAtTime(0.3, now);
-        subGain.gain.exponentialRampToValueAtTime(0.001, now + 0.25);
-        sub.connect(subGain);
-        subGain.connect(audioCtx.destination);
-        sub.start(now);
-        sub.stop(now + 0.26);
+        // Quantum Shard harmonic triad variations
+        const chords = [
+          [523.25, 659.25, 783.99, 1046.50], // Photos (C Major Crystal)
+          [659.25, 783.99, 987.77, 1318.51], // Smart Home (E Minor Crystal)
+          [783.99, 987.77, 1174.66, 1567.98]  // Jellyfin (G Major Crystal)
+        ];
 
-        // Rising sweep
-        const sweep = audioCtx.createOscillator();
-        const sweepGain = audioCtx.createGain();
-        sweep.type = 'sawtooth';
-        sweep.frequency.setValueAtTime(220, now + 0.05);
-        sweep.frequency.exponentialRampToValueAtTime(880, now + 0.25);
-        sweepGain.gain.setValueAtTime(0.12, now + 0.05);
-        sweepGain.gain.exponentialRampToValueAtTime(0.001, now + 0.25);
-        sweep.connect(sweepGain);
-        sweepGain.connect(audioCtx.destination);
-        sweep.start(now + 0.05);
-        sweep.stop(now + 0.26);
-      } catch (e) {
-        console.warn('Audio error:', e);
-      }
-    },
-
-    // 04. Quantum Crystal Resonance Chord
-    playPrism() {
-      if (!state.audioEnabled || !audioCtx) return;
-      try {
-        const now = audioCtx.currentTime;
-        const freqs = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6 chord
+        const freqs = chords[chordIndex % chords.length];
 
         freqs.forEach((f, i) => {
           const osc = audioCtx.createOscillator();
           const gain = audioCtx.createGain();
 
           osc.type = 'sine';
-          osc.frequency.setValueAtTime(f, now + i * 0.02);
+          osc.frequency.setValueAtTime(f, now + i * 0.022);
 
-          gain.gain.setValueAtTime(0.08, now + i * 0.02);
-          gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.45);
+          gain.gain.setValueAtTime(0.09, now + i * 0.022);
+          gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.55);
 
           osc.connect(gain);
           gain.connect(audioCtx.destination);
 
-          osc.start(now + i * 0.02);
-          osc.stop(now + 0.46);
+          osc.start(now + i * 0.022);
+          osc.stop(now + 0.58);
         });
       } catch (e) {
         console.warn('Audio error:', e);
@@ -155,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   /* ==========================================================================
-     2. Interactive Particle Background Canvas
+     2. Interactive Background Particle Constellation Canvas
      ========================================================================== */
   const canvas = document.getElementById('bg-canvas');
   const ctx = canvas.getContext('2d');
@@ -224,7 +142,6 @@ document.addEventListener('DOMContentLoaded', () => {
     mouse.y = -1000;
   });
 
-  // Render loop
   function renderParticles() {
     ctx.clearRect(0, 0, width, height);
 
@@ -233,7 +150,6 @@ document.addEventListener('DOMContentLoaded', () => {
       p1.update();
       p1.draw();
 
-      // Connect lines
       for (let j = i + 1; j < particles.length; j++) {
         const p2 = particles[j];
         const dx = p1.x - p2.x;
@@ -257,13 +173,12 @@ document.addEventListener('DOMContentLoaded', () => {
   renderParticles();
 
   /* ==========================================================================
-     3. Magnetic 3D Cursor Tracking for Buttons (Mercury & Prism)
+     3. Magnetic 3D Cursor Tracking for Liquid Mercury Buttons
      ========================================================================== */
   const magneticTargets = document.querySelectorAll('.magnetic-target');
 
   magneticTargets.forEach((btn) => {
     const glare = btn.querySelector('.mercury-glare');
-    const orb = btn.querySelector('.prism-core-orb');
 
     btn.addEventListener('mousemove', (e) => {
       const rect = btn.getBoundingClientRect();
@@ -287,12 +202,6 @@ document.addEventListener('DOMContentLoaded', () => {
         glare.style.left = `${x}px`;
         glare.style.top = `${y}px`;
       }
-
-      // Internal plasma orb position
-      if (orb) {
-        orb.style.left = `${x}px`;
-        orb.style.top = `${y}px`;
-      }
     });
 
     btn.addEventListener('mouseleave', () => {
@@ -306,7 +215,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const vfxContainer = document.getElementById('vfx-container');
 
   function triggerVFX(x, y, palette) {
-    // 1. Shockwave ring
+    // Shockwave ring
     const ring = document.createElement('div');
     ring.className = 'shockwave-ring';
     ring.style.left = `${x}px`;
@@ -316,7 +225,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     setTimeout(() => ring.remove(), 750);
 
-    // 2. Sparks explosion
+    // Sparks explosion
     const count = 18;
     for (let i = 0; i < count; i++) {
       const spark = document.createElement('div');
@@ -344,11 +253,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* ==========================================================================
-     5. Interaction Logs & Telemetry System
+     5. Toast Notification System
      ========================================================================== */
-  const interactionCounterEl = document.getElementById('interaction-counter');
-  const lastActivatedEl = document.getElementById('last-activated-name');
-  const terminalFeed = document.getElementById('terminal-feed');
   const toastCard = document.getElementById('toast-notification');
   const toastIcon = document.getElementById('toast-icon');
   const toastTitle = document.getElementById('toast-title');
@@ -357,124 +263,93 @@ document.addEventListener('DOMContentLoaded', () => {
   let toastTimer = null;
 
   function showToast(icon, title, message) {
+    if (!toastCard) return;
     if (toastTimer) clearTimeout(toastTimer);
-    toastIcon.textContent = icon;
-    toastTitle.textContent = title;
-    toastMessage.textContent = message;
+    if (toastIcon) toastIcon.textContent = icon;
+    if (toastTitle) toastTitle.textContent = title;
+    if (toastMessage) toastMessage.textContent = message;
 
     toastCard.classList.add('show');
     toastTimer = setTimeout(() => {
       toastCard.classList.remove('show');
-    }, 2800);
+    }, 2400);
   }
 
-  function logTerminal(type, message) {
-    const d = new Date();
-    const timeStr = `[${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}:${String(d.getSeconds()).padStart(2, '0')}]`;
+  // Portal Definitions
+  const portals = [
+    {
+      id: 'btn-photos',
+      name: 'Photo Library',
+      url: 'https://photos.evmancool.com',
+      icon: '📸',
+      color: ['#f43f5e', '#ec4899', '#fda4af'],
+      chordIdx: 0
+    },
+    {
+      id: 'btn-home',
+      name: 'Smart Home',
+      url: 'https://home.evmancool.com',
+      icon: '🏡',
+      color: ['#10b981', '#06b6d4', '#a7f3d0'],
+      chordIdx: 1
+    },
+    {
+      id: 'btn-jellyfin',
+      name: 'Jellyfin',
+      url: 'https://jellyfin.evmancool.com',
+      icon: '🎬',
+      color: ['#8a2be2', '#c084fc', '#6366f1'],
+      chordIdx: 2
+    }
+  ];
 
-    const line = document.createElement('div');
-    line.className = 'log-line';
-
-    let tagClass = 'log-info';
-    if (type === 'TRIGGER') tagClass = 'log-trigger';
-    if (type === 'SYS') tagClass = 'log-ok';
-
-    line.innerHTML = `<span class="log-time">${timeStr}</span> <span class="${tagClass}">${type}:</span> ${message}`;
-
-    terminalFeed.appendChild(line);
-    terminalFeed.scrollTop = terminalFeed.scrollHeight;
-  }
-
-  function handleButtonActivation(btnId, e) {
+  function handlePortalClick(portal, e) {
     initAudioContext();
-    state.totalInteractions++;
-    interactionCounterEl.textContent = state.totalInteractions;
 
-    // Determine click position for VFX
+    // 1. Play Quantum Shard Crystal Audio
+    SoundEngine.playQuantumCrystal(portal.chordIdx);
+
+    // 2. Determine Coordinates for VFX
     let clientX = window.innerWidth / 2;
     let clientY = window.innerHeight / 2;
     if (e && e.clientX) {
       clientX = e.clientX;
       clientY = e.clientY;
     } else {
-      const btn = document.getElementById(btnId);
-      if (btn) {
-        const rect = btn.getBoundingClientRect();
+      const el = document.getElementById(portal.id);
+      if (el) {
+        const rect = el.getBoundingClientRect();
         clientX = rect.left + rect.width / 2;
         clientY = rect.top + rect.height / 2;
       }
     }
 
-    switch (btnId) {
-      case 'btn-cyber-hero':
-        state.lastActivated = 'Neon Overdrive';
-        SoundEngine.playCyber();
-        triggerVFX(clientX, clientY, ['#00f2fe', '#fe0979', '#ffffff']);
-        showToast('⚡', 'Neon Overdrive Engaged', 'Laser conic beam & glitch frequency dispersed.');
-        logTerminal('TRIGGER', '01 // NEON_OVERDRIVE: Conic beam laser burst dispatched.');
-        break;
+    // 3. Trigger Particle Shockwaves & Spark Explosion
+    triggerVFX(clientX, clientY, portal.color);
 
-      case 'btn-mercury-hero':
-        state.lastActivated = 'Liquid Mercury';
-        SoundEngine.playLiquid();
-        triggerVFX(clientX, clientY, ['#8a2be2', '#c084fc', '#6366f1']);
-        showToast('💧', 'Liquid Mercury Surged', 'Fluid wave dynamics & magnetic inertia activated.');
-        logTerminal('TRIGGER', '02 // LIQUID_MERCURY: Hydrodynamic wave surge cycled.');
-        break;
-
-      case 'btn-warp-hero':
-        state.lastActivated = 'Hyperdrive Warp';
-        SoundEngine.playWarp();
-        triggerVFX(clientX, clientY, ['#ff6b35', '#d946ef', '#ffbe0b']);
-        showToast('🚀', 'Hyperdrive Warp Initiated', 'Synthwave mechanical extrusion depressed at Mach 9.');
-        logTerminal('TRIGGER', '03 // WARP_SPEED: Hyperdrive star trails propelled.');
-        break;
-
-      case 'btn-prism-hero':
-        state.lastActivated = 'Quantum Shard';
-        SoundEngine.playPrism();
-        triggerVFX(clientX, clientY, ['#10b981', '#00f2fe', '#a7f3d0']);
-        showToast('💎', 'Quantum Shard Resonated', 'Prismatic frosted refraction & crystal chord emitted.');
-        logTerminal('TRIGGER', '04 // QUANTUM_PRISM: Harmonic crystal resonance stabilized.');
-        break;
+    // 4. Trigger Jelly Bounce Animation
+    const btnEl = document.getElementById(portal.id);
+    if (btnEl) {
+      btnEl.classList.add('active');
+      setTimeout(() => btnEl.classList.remove('active'), 500);
     }
 
-    lastActivatedEl.textContent = state.lastActivated;
+    // 5. Toast Notification
+    showToast(portal.icon, `Connecting to ${portal.name}`, `Opening ${portal.url.replace('https://', '')}...`);
   }
 
-  // Attach click listeners to 4 hero buttons
-  const heroButtons = ['btn-cyber-hero', 'btn-mercury-hero', 'btn-warp-hero', 'btn-prism-hero'];
-  heroButtons.forEach((id) => {
-    const el = document.getElementById(id);
+  // Attach click listeners to the portal links
+  portals.forEach((portal) => {
+    const el = document.getElementById(portal.id);
     if (el) {
-      el.addEventListener('click', (e) => handleButtonActivation(id, e));
+      el.addEventListener('click', (e) => {
+        handlePortalClick(portal, e);
+      });
     }
   });
 
   /* ==========================================================================
-     6. Synchronized Salvo (Trigger All 4 Buttons)
-     ========================================================================== */
-  const triggerAllBtn = document.getElementById('trigger-all-btn');
-  if (triggerAllBtn) {
-    triggerAllBtn.addEventListener('click', () => {
-      initAudioContext();
-      logTerminal('SYS', 'SALVO_START: Initiating cascading button sequence...');
-
-      heroButtons.forEach((btnId, idx) => {
-        setTimeout(() => {
-          const btn = document.getElementById(btnId);
-          if (btn) {
-            btn.classList.add('active');
-            handleButtonActivation(btnId, null);
-            setTimeout(() => btn.classList.remove('active'), 250);
-          }
-        }, idx * 160);
-      });
-    });
-  }
-
-  /* ==========================================================================
-     7. Audio Synthesizer Toggle
+     6. Audio Synthesizer Toggle
      ========================================================================== */
   const soundToggleBtn = document.getElementById('sound-toggle');
   const soundStatusText = document.getElementById('sound-status-text');
@@ -486,32 +361,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (state.audioEnabled) {
         soundToggleBtn.classList.remove('muted');
-        soundStatusText.textContent = 'ON';
-        logTerminal('SYS', 'AUDIO_STATE: Web Audio synthesized effects ENABLED.');
-        SoundEngine.playPrism();
+        if (soundStatusText) soundStatusText.textContent = 'ON';
+        SoundEngine.playQuantumCrystal(0);
       } else {
         soundToggleBtn.classList.add('muted');
-        soundStatusText.textContent = 'MUTED';
-        logTerminal('SYS', 'AUDIO_STATE: Web Audio effects MUTED.');
+        if (soundStatusText) soundStatusText.textContent = 'MUTED';
       }
     });
   }
 
   /* ==========================================================================
-     8. Accent Palette Switcher
+     7. Accent Palette Switcher
      ========================================================================== */
   const themeAccentBtn = document.getElementById('theme-accent-btn');
   const accentPillLabel = themeAccentBtn ? themeAccentBtn.querySelector('.pill-label') : null;
 
   if (themeAccentBtn) {
     themeAccentBtn.addEventListener('click', () => {
-      // Remove current theme class
       const currentTheme = state.themes[state.currentThemeIndex];
       if (currentTheme.class) {
         document.body.classList.remove(currentTheme.class);
       }
 
-      // Next theme
       state.currentThemeIndex = (state.currentThemeIndex + 1) % state.themes.length;
       const nextTheme = state.themes[state.currentThemeIndex];
 
@@ -524,30 +395,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       initAudioContext();
-      SoundEngine.playLiquid();
-      logTerminal('SYS', `THEME_SWAP: Accent palette changed to [${nextTheme.name.toUpperCase()}].`);
+      SoundEngine.playQuantumCrystal(1);
     });
   }
-
-  /* ==========================================================================
-     9. Real-Time FPS Counter
-     ========================================================================== */
-  const fpsCounterEl = document.getElementById('fps-counter');
-  let frameCount = 0;
-  let lastFpsUpdate = performance.now();
-
-  function updateFps() {
-    frameCount++;
-    const now = performance.now();
-    if (now - lastFpsUpdate >= 1000) {
-      const fps = Math.round((frameCount * 1000) / (now - lastFpsUpdate));
-      if (fpsCounterEl) {
-        fpsCounterEl.textContent = `${fps} FPS`;
-      }
-      frameCount = 0;
-      lastFpsUpdate = now;
-    }
-    requestAnimationFrame(updateFps);
-  }
-  updateFps();
 });

@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AETHER // Kinetic Interface Laboratory - 4 Animated Buttons</title>
-  <meta name="description" content="A futuristic, hyper-interactive homepage showcasing 4 next-generation animated button mechanics with fluid physics, quantum glass, cyber neon, and warp speed dynamics.">
+  <title>EvManCool</title>
+  <meta name="description" content="EvManCool personal dashboard. Quick access to Photo Library, Smart Home, and Jellyfin media.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body class="dark-theme">
@@ -19,7 +19,7 @@
   <div class="ambient-glow glow-2"></div>
   <div class="ambient-glow glow-3"></div>
 
-  <!-- Particle Explosion Container for button clicks -->
+  <!-- Particle Explosion & Shockwave VFX Container -->
   <div id="vfx-container" aria-hidden="true"></div>
 
   <!-- Main Navigation -->
@@ -31,16 +31,9 @@
           <span class="symbol-ring"></span>
         </div>
         <div class="brand-text">
-          <span class="brand-name">AETHER<span class="brand-accent">.UI</span></span>
-          <span class="brand-tagline">KINETIC LABS</span>
+          <span class="brand-name">EvManCool<span class="brand-accent">.</span></span>
         </div>
       </a>
-
-      <nav class="nav-links">
-        <a href="#hero" class="nav-link active">Showcase</a>
-        <a href="#mechanics" class="nav-link">Physics & Code</a>
-        <a href="#telemetry" class="nav-link">Telemetry</a>
-      </nav>
 
       <div class="nav-controls">
         <!-- Audio Synth Toggle -->
@@ -54,6 +47,7 @@
           <span class="pill-label">SFX: <span id="sound-status-text">ON</span></span>
         </button>
 
+        <!-- Theme Accent Switcher -->
         <button id="theme-accent-btn" class="control-pill accent-pill" title="Cycle Accent Palette" aria-label="Cycle Accent Color">
           <span class="color-dot"></span>
           <span class="pill-label">Aurora</span>
@@ -62,78 +56,23 @@
     </div>
   </header>
 
-  <!-- Main Hero Section -->
-  <main id="hero" class="hero-section">
+  <!-- Main Content -->
+  <main class="hero-section">
     <div class="hero-container">
-      <!-- Badge Pill -->
-      <div class="hero-badge">
-        <span class="badge-pulse"></span>
-        <span class="badge-text">Interactive Physics Engine &bull; Version 2.4</span>
-      </div>
-
       <!-- Main Headline -->
       <h1 class="hero-title">
-        Crafting Buttons That Feel <br>
-        <span class="gradient-text kinetic-text">Electrifyingly Alive.</span>
+        <span class="gradient-text kinetic-text">EvManCool</span>
       </h1>
 
-      <p class="hero-subtitle">
-        Four hand-crafted interaction paradigms combining GPU shaders, magnetic vector physics,
-        conic laser borders, and generative Web Audio synthesis.
-      </p>
+      <!-- 3 Simplified Category Boxes with Liquid Mercury Buttons -->
+      <div class="portals-grid">
 
-      <!-- 4 ANIMATED BUTTONS HERO SHOWCASE -->
-      <div class="buttons-showcase-grid" id="main-showcase">
-
-        <!-- ==============================================
-             BUTTON 1: CYBER NEON PULSE (Conic Laser Orbit + Glitch)
-             ============================================== -->
-        <div class="button-card" data-btn="cyber">
-          <div class="button-card-header">
-            <span class="btn-idx">01</span>
-            <span class="btn-type">Cybernetic / Laser Orbit</span>
-          </div>
-
+        <!-- CATEGORY 1: Photo Library -->
+        <div class="portal-card">
+          <h2 class="portal-category-name photos-title">Photo Library</h2>
           <div class="button-stage">
-            <button class="btn-anim btn-cyber" id="btn-cyber-hero" data-sound="cyber">
-              <!-- Conic Rotating Border Beam -->
-              <span class="cyber-border-beam"></span>
-              <!-- Scanline Glitch Bar -->
-              <span class="cyber-scanline"></span>
-              <!-- Inner Button Core -->
-              <span class="cyber-content">
-                <span class="cyber-icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
-                  </svg>
-                </span>
-                <span class="cyber-text" data-text="NEON OVERDRIVE">NEON OVERDRIVE</span>
-                <span class="cyber-arrow">&rarr;</span>
-              </span>
-              <!-- Corner Tech Brackets -->
-              <span class="corner-bracket top-left"></span>
-              <span class="corner-bracket bottom-right"></span>
-            </button>
-          </div>
-
-          <div class="card-caption">
-            <span class="tag">Conic Beam</span>
-            <span class="tag">Glitch Sheen</span>
-            <span class="tag">Spark Burst</span>
-          </div>
-        </div>
-
-        <!-- ==============================================
-             BUTTON 2: LIQUID MERCURY (Magnetic Tilt + Fluid Wave Surge)
-             ============================================== -->
-        <div class="button-card" data-btn="mercury">
-          <div class="button-card-header">
-            <span class="btn-idx">02</span>
-            <span class="btn-type">Hydrodynamic / Magnetic</span>
-          </div>
-
-          <div class="button-stage">
-            <button class="btn-anim btn-mercury magnetic-target" id="btn-mercury-hero" data-sound="liquid">
+            <a href="https://photos.evmancool.com" target="_blank" rel="noopener noreferrer" 
+               class="btn-anim btn-mercury btn-mercury-photos magnetic-target" id="btn-photos" data-name="Photo Library" data-url="https://photos.evmancool.com">
               <!-- Specular Light Reflection Follower -->
               <span class="mercury-glare"></span>
               <!-- Fluid Wave SVG Container -->
@@ -145,274 +84,96 @@
               </div>
               <!-- Button Content -->
               <span class="mercury-content">
-                <span class="mercury-drop-icon">
-                  <svg viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path>
-                  </svg>
-                </span>
-                <span class="mercury-text">LIQUID MERCURY</span>
-                <span class="mercury-badge">FLOW</span>
-              </span>
-            </button>
-          </div>
-
-          <div class="card-caption">
-            <span class="tag">Cursor Tracking 3D</span>
-            <span class="tag">SVG Wave Surge</span>
-            <span class="tag">Viscous Squish</span>
-          </div>
-        </div>
-
-        <!-- ==============================================
-             BUTTON 3: HYPERDRIVE WARP (Retro Synthwave + Depth Extrusion)
-             ============================================== -->
-        <div class="button-card" data-btn="warp">
-          <div class="button-card-header">
-            <span class="btn-idx">03</span>
-            <span class="btn-type">Synthwave / Warp Tunnel</span>
-          </div>
-
-          <div class="button-stage">
-            <button class="btn-anim btn-warp" id="btn-warp-hero" data-sound="warp">
-              <!-- 3D Perspective Extrusion Shadow Layers -->
-              <span class="warp-depth-shadow"></span>
-              <!-- Warp Speed Particle Streaks -->
-              <div class="warp-stars-container">
-                <span class="star-trail st-1"></span>
-                <span class="star-trail st-2"></span>
-                <span class="star-trail st-3"></span>
-                <span class="star-trail st-4"></span>
-                <span class="star-trail st-5"></span>
-              </div>
-              <!-- Button Face -->
-              <span class="warp-face">
-                <span class="warp-grid-bg"></span>
-                <span class="warp-icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                    <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"></path>
-                    <path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"></path>
-                    <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"></path>
-                    <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"></path>
-                  </svg>
-                </span>
-                <span class="warp-text">WARP SPEED</span>
-                <span class="warp-speedometer">MACH 9</span>
-              </span>
-            </button>
-          </div>
-
-          <div class="card-caption">
-            <span class="tag">3D Mechanical Bevel</span>
-            <span class="tag">Speed Streaks</span>
-            <span class="tag">Tactile Thud</span>
-          </div>
-        </div>
-
-        <!-- ==============================================
-             BUTTON 4: QUANTUM PRISM (Frosted Glass + Floating Core Orb)
-             ============================================== -->
-        <div class="button-card" data-btn="prism">
-          <div class="button-card-header">
-            <span class="btn-idx">04</span>
-            <span class="btn-type">Refractive / Prismatic Glass</span>
-          </div>
-
-          <div class="button-stage">
-            <button class="btn-anim btn-prism magnetic-target" id="btn-prism-hero" data-sound="prism">
-              <!-- Prismatic Rainbow Iridescent Border -->
-              <span class="prism-rainbow-border"></span>
-              <!-- Floating Energy Plasma Orb (Tracks Cursor) -->
-              <span class="prism-core-orb"></span>
-              <!-- Frosted Glass Sheen -->
-              <span class="prism-glass-plate"></span>
-              <!-- Content -->
-              <span class="prism-content">
-                <span class="prism-gem-icon">
+                <span class="mercury-icon">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M6 3h12l4 6-10 13L2 9z"></path>
-                    <path d="M11 3L8 9l4 13 4-13-3-6"></path>
-                    <path d="M2 9h20"></path>
+                    <rect x="3" y="3" width="18" height="18" rx="4" ry="4"></rect>
+                    <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                    <polyline points="21 15 16 10 5 21"></polyline>
                   </svg>
                 </span>
-                <span class="prism-text">QUANTUM SHARD</span>
-                <span class="prism-status">
-                  <span class="prism-dot"></span>
-                  STABLE
-                </span>
+                <span class="mercury-text">PHOTOS</span>
+                <span class="mercury-badge">photos.evmancool.com</span>
               </span>
-            </button>
-          </div>
-
-          <div class="card-caption">
-            <span class="tag">Frosted Refraction</span>
-            <span class="tag">Plasma Core Orb</span>
-            <span class="tag">Resonance Chime</span>
+            </a>
           </div>
         </div>
 
-      </div>
-
-      <!-- Quick Action Deck -->
-      <div class="action-deck">
-        <button id="trigger-all-btn" class="deck-btn">
-          <span class="deck-icon">⚡</span>
-          <span>Fire Synchronized Salvo (All 4 Buttons)</span>
-        </button>
-
-        <div class="deck-stats">
-          <div class="stat-item">
-            <span class="stat-value" id="interaction-counter">0</span>
-            <span class="stat-label">Total Interactions</span>
-          </div>
-          <div class="stat-divider"></div>
-          <div class="stat-item">
-            <span class="stat-value" id="last-activated-name">None</span>
-            <span class="stat-label">Last Activated</span>
-          </div>
-          <div class="stat-divider"></div>
-          <div class="stat-item">
-            <span class="stat-value" id="fps-counter">60 FPS</span>
-            <span class="stat-label">Render Engine</span>
+        <!-- CATEGORY 2: Smart Home -->
+        <div class="portal-card">
+          <h2 class="portal-category-name home-title">Smart Home</h2>
+          <div class="button-stage">
+            <a href="https://home.evmancool.com" target="_blank" rel="noopener noreferrer" 
+               class="btn-anim btn-mercury btn-mercury-home magnetic-target" id="btn-home" data-name="Smart Home" data-url="https://home.evmancool.com">
+              <!-- Specular Light Reflection Follower -->
+              <span class="mercury-glare"></span>
+              <!-- Fluid Wave SVG Container -->
+              <div class="liquid-wave-wrap">
+                <div class="liquid-wave-bg"></div>
+                <svg class="liquid-wave-svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                  <path d="M0,0 C150,90 350,-40 500,45 C650,130 900,10 1200,50 L1200,120 L0,120 Z"></path>
+                </svg>
+              </div>
+              <!-- Button Content -->
+              <span class="mercury-content">
+                <span class="mercury-icon">
+                  <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 3L2 12h3v8h6v-6h2v6h6v-8h3L12 3z"/>
+                  </svg>
+                </span>
+                <span class="mercury-text">SMART HOME</span>
+                <span class="mercury-badge">home.evmancool.com</span>
+              </span>
+            </a>
           </div>
         </div>
+
+        <!-- CATEGORY 3: Jellyfin -->
+        <div class="portal-card">
+          <h2 class="portal-category-name jellyfin-title">Jellyfin</h2>
+          <div class="button-stage">
+            <a href="https://jellyfin.evmancool.com" target="_blank" rel="noopener noreferrer" 
+               class="btn-anim btn-mercury btn-mercury-jellyfin magnetic-target" id="btn-jellyfin" data-name="Jellyfin" data-url="https://jellyfin.evmancool.com">
+              <!-- Specular Light Reflection Follower -->
+              <span class="mercury-glare"></span>
+              <!-- Fluid Wave SVG Container -->
+              <div class="liquid-wave-wrap">
+                <div class="liquid-wave-bg"></div>
+                <svg class="liquid-wave-svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                  <path d="M0,0 C150,90 350,-40 500,45 C650,130 900,10 1200,50 L1200,120 L0,120 Z"></path>
+                </svg>
+              </div>
+              <!-- Button Content -->
+              <span class="mercury-content">
+                <span class="mercury-icon">
+                  <svg viewBox="0 0 24 24" fill="currentColor">
+                    <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                  </svg>
+                </span>
+                <span class="mercury-text">JELLYFIN</span>
+                <span class="mercury-badge">jellyfin.evmancool.com</span>
+              </span>
+            </a>
+          </div>
+        </div>
+
       </div>
     </div>
   </main>
 
-  <!-- Deep Dive Technical Mechanics & Physics Section -->
-  <section id="mechanics" class="mechanics-section">
-    <div class="section-container">
-      <div class="section-header">
-        <span class="section-tag">ARCHITECTURE</span>
-        <h2 class="section-title">Anatomy of the 4 Motion Engines</h2>
-        <p class="section-desc">Each button is built without external heavy animation libraries—leveraging pure hardware-accelerated CSS3 and Web Audio oscillators.</p>
-      </div>
-
-      <div class="mechanics-grid">
-        <!-- Card 1 -->
-        <article class="mechanic-card">
-          <div class="mech-header">
-            <div class="mech-badge cyan-badge">01 // CYBER</div>
-            <h3>Conic Laser Border & Glitch Sheen</h3>
-          </div>
-          <p class="mech-body">
-            Uses a dual-layered CSS <code>conic-gradient</code> rotating continuously behind an inner clipping mask.
-            Upon hover, an automated horizontal chromatic dispersion bar sweeps across the typography with randomized keyframe glitching.
-          </p>
-          <div class="mech-tech-specs">
-            <div class="spec-row"><span>GPU Layer:</span> <code>transform: translateZ(0)</code></div>
-            <div class="spec-row"><span>Border Rate:</span> <code>3.5s linear infinite</code></div>
-            <div class="spec-row"><span>VFX:</span> Neon Spark Dispersion</div>
-          </div>
-        </article>
-
-        <!-- Card 2 -->
-        <article class="mechanic-card">
-          <div class="mech-header">
-            <div class="mech-badge violet-badge">02 // MERCURY</div>
-            <h3>Magnetic Vector Tracking & Liquid Wave</h3>
-          </div>
-          <p class="mech-body">
-            Calculates Euclidean distance and pitch/yaw rotation angles relative to button center in <code>requestAnimationFrame</code>.
-            Simultaneously, a cubic-bezier SVG liquid wave surges upward, creating an authentic fluid containment effect.
-          </p>
-          <div class="mech-tech-specs">
-            <div class="spec-row"><span>Max 3D Tilt:</span> <code>&plusmn;18 deg 3D Perspective</code></div>
-            <div class="spec-row"><span>Spring Damping:</span> <code>cubic-bezier(0.34, 1.56, 0.64, 1)</code></div>
-            <div class="spec-row"><span>Audio Wave:</span> Frequency Modulated Sine Droplet</div>
-          </div>
-        </article>
-
-        <!-- Card 3 -->
-        <article class="mechanic-card">
-          <div class="mech-header">
-            <div class="mech-badge orange-badge">03 // WARP</div>
-            <h3>Synthwave Depth Extrusion & Star Trails</h3>
-          </div>
-          <p class="mech-body">
-            Utilizes multi-layered stacked hard <code>box-shadow</code> offsets that mimic physical retro mechanical keyboard switches.
-            On hover, star streaks shoot along the radial vector with rapid scale transformation and perspective grid movement.
-          </p>
-          <div class="mech-tech-specs">
-            <div class="spec-row"><span>Depth Layers:</span> <code>4 Stacked Box Shadows</code></div>
-            <div class="spec-row"><span>Depression Travel:</span> <code>6px translateY on active</code></div>
-            <div class="spec-row"><span>Audio Wave:</span> Sawtooth Sub-Harmonic Boom</div>
-          </div>
-        </article>
-
-        <!-- Card 4 -->
-        <article class="mechanic-card">
-          <div class="mech-header">
-            <div class="mech-badge emerald-badge">04 // PRISM</div>
-            <h3>Frosted Glass & Magnetic Plasma Core</h3>
-          </div>
-          <p class="mech-body">
-            Leverages high-index backdrop blur filters with chromatic border shifting. A virtual plasma orb floats suspended inside the glass substrate,
-            smoothly following cursor proximity with subtle lag for natural inertia.
-          </p>
-          <div class="mech-tech-specs">
-            <div class="spec-row"><span>Glass Filter:</span> <code>backdrop-filter: blur(18px)</code></div>
-            <div class="spec-row"><span>Internal Inertia:</span> <code>0.12 lerp factor</code></div>
-            <div class="spec-row"><span>Audio Wave:</span> High-Q Crystal Tri-Chime</div>
-          </div>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- Interactive Telemetry & Playground Section -->
-  <section id="telemetry" class="telemetry-section">
-    <div class="section-container">
-      <div class="telemetry-box">
-        <div class="telemetry-info">
-          <span class="telemetry-badge">LIVE MONITOR</span>
-          <h3>Ready to embed into your next application?</h3>
-          <p>
-            All source code is cleanly decoupled into standard HTML, CSS, and vanilla JavaScript.
-            Open in any browser, customize colors, or integrate into React, Vue, Svelte, or Astro with zero config.
-          </p>
-          <div class="telemetry-code-pill">
-            <code>git clone / open index.html</code>
-          </div>
-        </div>
-
-        <div class="telemetry-panel">
-          <div class="panel-header">
-            <span class="panel-dot red"></span>
-            <span class="panel-dot yellow"></span>
-            <span class="panel-dot green"></span>
-            <span class="panel-title">INTERACTION_CONSOLE.LOG</span>
-          </div>
-          <div class="panel-terminal" id="terminal-feed">
-            <div class="log-line"><span class="log-time">[00:00:01]</span> <span class="log-ok">SYS_INIT:</span> AETHER UI Engine Online.</div>
-            <div class="log-line"><span class="log-time">[00:00:02]</span> <span class="log-info">AUDIO_SYNTH:</span> Web Audio Context ready.</div>
-            <div class="log-line"><span class="log-time">[00:00:03]</span> <span class="log-info">BUTTONS:</span> 4 Kinetic triggers mounted.</div>
-            <div class="log-line log-waiting"><span class="log-time">[READY]</span> Hover and click buttons to observe telemetry...</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Toast Notification Floating Widget -->
+  <!-- Minimal Toast Notification -->
   <div id="toast-notification" class="toast-card" role="status" aria-live="polite">
-    <div class="toast-icon" id="toast-icon">⚡</div>
+    <div class="toast-icon" id="toast-icon">💎</div>
     <div class="toast-body">
-      <div class="toast-title" id="toast-title">Button Activated</div>
-      <div class="toast-message" id="toast-message">Pulse animation dispatched.</div>
+      <div class="toast-title" id="toast-title">Connecting</div>
+      <div class="toast-message" id="toast-message">Opening service...</div>
     </div>
   </div>
 
   <!-- Footer -->
   <footer class="footer">
     <div class="footer-container">
-      <div class="footer-left">
-        <span class="footer-brand">AETHER // UI</span>
-        <span class="footer-copy">&copy; 2026 Kinetic Interface Studio. Built with pure HTML5, CSS3, & Web Audio.</span>
-      </div>
-      <div class="footer-right">
-        <a href="#hero" class="back-to-top">Back to Top &uarr;</a>
-      </div>
+      <span class="footer-brand">EvManCool</span>
+      <span class="footer-copy">&copy; 2026 EvManCool</span>
     </div>
   </footer>
 
