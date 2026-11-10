@@ -207,6 +207,14 @@ document.addEventListener('DOMContentLoaded', () => {
     btn.addEventListener('mouseleave', () => {
       btn.style.transform = 'perspective(600px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
     });
+
+    btn.addEventListener('touchend', () => {
+      btn.style.transform = 'perspective(600px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+    });
+
+    btn.addEventListener('touchcancel', () => {
+      btn.style.transform = 'perspective(600px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+    });
   });
 
   /* ==========================================================================
