@@ -4,11 +4,500 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>EvManCool</title>
-  <meta name="description" content="EvManCool personal dashboard. Quick access to Photo Library, Smart Home, and Jellyfin media.">
+  <meta name="description" content="EvManCool personal dashboard. Quick access to Photo Library, Smart Home, and Jellyfin.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Space+Grotesk:wght@600;700;800&family=JetBrains+Mono:wght@600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <style>
+    /* ==========================================================================
+       Embedded Self-Contained Styles (Ensures 100% Fidelity on GitHub Pages)
+       ========================================================================== */
+    :root {
+      --bg-dark: #07090e;
+      --bg-card: rgba(18, 24, 38, 0.85);
+      --bg-card-hover: rgba(26, 34, 54, 0.95);
+      --border-color: rgba(255, 255, 255, 0.15);
+      --border-highlight: rgba(255, 255, 255, 0.28);
+      --text-primary: #f0f4fc;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      --accent-cyan: #00f2fe;
+      --accent-magenta: #fe0979;
+      --accent-violet: #8a2be2;
+      --accent-emerald: #10b981;
+      --accent-rose: #f43f5e;
+      --primary-accent: #00f2fe;
+      --primary-accent-glow: rgba(0, 242, 254, 0.35);
+      --ease-elastic: cubic-bezier(0.34, 1.56, 0.64, 1);
+      --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    body.theme-sunset { --primary-accent: #ff6b35; --primary-accent-glow: rgba(255, 107, 53, 0.4); }
+    body.theme-cyber { --primary-accent: #fe0979; --primary-accent-glow: rgba(254, 9, 121, 0.4); }
+    body.theme-matrix { --primary-accent: #10b981; --primary-accent-glow: rgba(16, 185, 129, 0.4); }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      background-color: var(--bg-dark);
+      color: var(--text-primary);
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+    }
+
+    /* Background Canvas & Ambient Orbs */
+    #bg-canvas {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.65;
+    }
+
+    .ambient-glow {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(120px);
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.35;
+    }
+    .glow-1 {
+      top: -10%; left: 10%; width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(0, 242, 254, 0.3) 0%, transparent 70%);
+      animation: floatOrb 18s infinite alternate ease-in-out;
+    }
+    .glow-2 {
+      top: 40%; right: -5%; width: 550px; height: 550px;
+      background: radial-gradient(circle, rgba(254, 9, 121, 0.25) 0%, transparent 70%);
+      animation: floatOrb 22s infinite alternate-reverse ease-in-out;
+    }
+    @keyframes floatOrb {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(35px, -35px); }
+    }
+
+    /* Navbar */
+    .navbar {
+      position: relative;
+      width: 100%;
+      height: 76px;
+      z-index: 100;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      background: rgba(7, 9, 14, 0.75);
+      border-bottom: 1px solid var(--border-color);
+    }
+    .nav-container {
+      max-width: 1160px;
+      height: 100%;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      text-decoration: none;
+      color: var(--text-primary);
+    }
+    .logo-symbol {
+      width: 32px;
+      height: 32px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .symbol-core {
+      width: 12px;
+      height: 12px;
+      border-radius: 4px;
+      background: var(--primary-accent);
+      box-shadow: 0 0 14px var(--primary-accent-glow);
+      transform: rotate(45deg);
+      transition: all 0.4s var(--ease-elastic);
+    }
+    .symbol-ring {
+      position: absolute;
+      inset: 0;
+      border: 1.5px solid rgba(255, 255, 255, 0.3);
+      border-radius: 8px;
+      animation: spinSlow 12s linear infinite;
+    }
+    @keyframes spinSlow {
+      from { transform: rotate(0deg); } to { transform: rotate(360deg); }
+    }
+    .brand-name {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 800;
+      font-size: 1.3rem;
+      letter-spacing: 0.04em;
+    }
+    .brand-accent { color: var(--primary-accent); }
+
+    .nav-controls {
+      display: flex;
+      gap: 0.75rem;
+      align-items: center;
+    }
+    .control-pill {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border-color);
+      color: var(--text-secondary);
+      padding: 0.45rem 0.9rem;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .control-pill:hover {
+      background: rgba(255, 255, 255, 0.12);
+      color: var(--text-primary);
+      border-color: var(--border-highlight);
+      transform: translateY(-1px);
+    }
+    .sound-icon svg { width: 15px; height: 15px; }
+    .control-pill.muted .sound-icon svg { opacity: 0.4; }
+    .color-dot {
+      width: 9px; height: 9px; border-radius: 50%;
+      background: var(--primary-accent);
+      box-shadow: 0 0 8px var(--primary-accent);
+    }
+
+    /* Main Section */
+    .hero-section {
+      position: relative;
+      z-index: 10;
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 3.5rem 1.5rem;
+    }
+    .hero-container {
+      max-width: 1160px;
+      width: 100%;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .hero-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(3.2rem, 7vw, 5.2rem);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      margin-bottom: 3.5rem;
+    }
+    .gradient-text {
+      background: linear-gradient(135deg, #ffffff 0%, var(--primary-accent) 45%, var(--accent-magenta) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
+    }
+
+    /* ==========================================================================
+       Robust Horizontal Row Flexbox Layout (Guarantees side-by-side on GitHub)
+       ========================================================================== */
+    .portals-grid {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: stretch;
+      gap: 2rem;
+      width: 100%;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    /* Explicit, visible card borders and background */
+    .portal-card {
+      flex: 1 1 0;
+      min-width: 250px;
+      max-width: 340px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.45);
+      border-radius: 24px;
+      padding: 2.5rem 1.8rem;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.35s var(--ease-smooth);
+    }
+    .portal-card:hover {
+      background: var(--bg-card-hover);
+      border-color: rgba(255, 255, 255, 0.28);
+      transform: translateY(-5px);
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6);
+    }
+
+    .portal-category-name {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.45rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      margin-bottom: 1.8rem;
+      text-align: center;
+    }
+    .photos-title { color: #fda4af; }
+    .home-title { color: #a7f3d0; }
+    .jellyfin-title { color: #d8b4fe; }
+
+    .button-stage {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+    }
+
+    /* ==========================================================================
+       Liquid Mercury Animated Buttons
+       ========================================================================== */
+    .btn-anim {
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      outline: none;
+      user-select: none;
+      position: relative;
+      text-decoration: none;
+    }
+
+    .btn-mercury {
+      position: relative;
+      padding: 1.15rem 2.2rem;
+      border-radius: 999px;
+      background: #0f1322;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.2);
+      overflow: hidden;
+      transform-style: preserve-3d;
+      perspective: 600px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      max-width: 260px;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.15s ease-out;
+      cursor: pointer;
+    }
+
+    .liquid-wave-wrap {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      overflow: hidden;
+      border-radius: 999px;
+      pointer-events: none;
+    }
+    .liquid-wave-bg {
+      position: absolute;
+      inset: 0;
+      transform: translateY(105%);
+      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .liquid-wave-svg {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 250%;
+      height: 50px;
+      transform: translateY(105%);
+      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      animation: waveMotion 4s linear infinite;
+    }
+    @keyframes waveMotion {
+      0% { transform: translateX(0) translateY(105%); }
+      50% { transform: translateX(-50%) translateY(105%); }
+      100% { transform: translateX(0) translateY(105%); }
+    }
+
+    .mercury-glare {
+      position: absolute;
+      width: 130px;
+      height: 130px;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.5) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      opacity: 0;
+      transition: opacity 0.25s ease;
+      z-index: 3;
+      mix-blend-mode: overlay;
+    }
+
+    .mercury-content {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 1.05rem;
+      letter-spacing: 0.08em;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+      pointer-events: none;
+    }
+    .mercury-icon svg {
+      width: 18px;
+      height: 18px;
+      transition: transform 0.4s var(--ease-elastic);
+    }
+
+    /* Photo Library */
+    .btn-mercury-photos { border: 1px solid rgba(244, 63, 94, 0.5); }
+    .btn-mercury-photos .liquid-wave-bg { background: linear-gradient(135deg, #f43f5e 0%, #ec4899 50%, #f97316 100%); }
+    .btn-mercury-photos .liquid-wave-svg { fill: #ec4899; }
+    .btn-mercury-photos .mercury-icon svg { stroke: #fda4af; }
+    .btn-mercury-photos:hover {
+      border-color: rgba(244, 63, 94, 0.9);
+      box-shadow: 0 15px 35px rgba(244, 63, 94, 0.45), inset 0 1px 2px rgba(255, 255, 255, 0.5);
+    }
+    .btn-mercury-photos:hover .mercury-icon svg {
+      transform: scale(1.25) rotate(-10deg);
+      stroke: #ffffff;
+    }
+
+    /* Smart Home */
+    .btn-mercury-home { border: 1px solid rgba(16, 185, 129, 0.5); }
+    .btn-mercury-home .liquid-wave-bg { background: linear-gradient(135deg, #059669 0%, #10b981 50%, #06b6d4 100%); }
+    .btn-mercury-home .liquid-wave-svg { fill: #10b981; }
+    .btn-mercury-home .mercury-icon svg { fill: #a7f3d0; }
+    .btn-mercury-home:hover {
+      border-color: rgba(16, 185, 129, 0.9);
+      box-shadow: 0 15px 35px rgba(16, 185, 129, 0.45), inset 0 1px 2px rgba(255, 255, 255, 0.5);
+    }
+    .btn-mercury-home:hover .mercury-icon svg {
+      transform: scale(1.25) rotate(-10deg);
+      fill: #ffffff;
+    }
+
+    /* Jellyfin */
+    .btn-mercury-jellyfin { border: 1px solid rgba(138, 43, 226, 0.5); }
+    .btn-mercury-jellyfin .liquid-wave-bg { background: linear-gradient(135deg, #6366f1 0%, #8a2be2 60%, #c084fc 100%); }
+    .btn-mercury-jellyfin .liquid-wave-svg { fill: #8a2be2; }
+    .btn-mercury-jellyfin .mercury-icon svg { fill: #c084fc; }
+    .btn-mercury-jellyfin:hover {
+      border-color: rgba(192, 132, 252, 0.9);
+      box-shadow: 0 15px 35px rgba(138, 43, 226, 0.45), inset 0 1px 2px rgba(255, 255, 255, 0.5);
+    }
+    .btn-mercury-jellyfin:hover .mercury-icon svg {
+      transform: scale(1.25) rotate(-10deg);
+      fill: #ffffff;
+    }
+
+    .btn-mercury:hover .liquid-wave-bg { transform: translateY(0%); }
+    .btn-mercury:hover .liquid-wave-svg { transform: translateY(-80%); }
+    .btn-mercury:hover .mercury-glare { opacity: 1; }
+    .btn-mercury:active, .btn-mercury.active { animation: jellySquish 0.45s ease; }
+    @keyframes jellySquish {
+      0% { transform: scale(1, 1); }
+      25% { transform: scale(1.15, 0.85); }
+      50% { transform: scale(0.9, 1.1); }
+      75% { transform: scale(1.05, 0.95); }
+      100% { transform: scale(1, 1); }
+    }
+
+    /* VFX Elements */
+    #vfx-container { position: fixed; inset: 0; pointer-events: none; z-index: 9999; }
+    .particle-spark {
+      position: absolute; border-radius: 50%; pointer-events: none;
+      animation: sparkFade 0.65s cubic-bezier(0.1, 0.9, 0.2, 1) forwards;
+    }
+    @keyframes sparkFade {
+      0% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+      100% { transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(0); opacity: 0; }
+    }
+    .shockwave-ring {
+      position: absolute; border-radius: 50%; border: 2px solid var(--primary-accent);
+      transform: translate(-50%, -50%) scale(0.2); animation: ringExp 0.75s ease-out forwards;
+    }
+    @keyframes ringExp {
+      0% { transform: translate(-50%, -50%) scale(0.2); opacity: 0.9; }
+      100% { transform: translate(-50%, -50%) scale(3.5); opacity: 0; }
+    }
+
+    /* Toast */
+    .toast-card {
+      position: fixed; bottom: 2rem; right: 2rem; background: rgba(18, 24, 38, 0.95);
+      border: 1px solid var(--border-highlight); border-radius: 14px; padding: 0.9rem 1.3rem;
+      display: flex; align-items: center; gap: 0.8rem; box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+      backdrop-filter: blur(16px); z-index: 1000; transform: translateY(120px) scale(0.9);
+      opacity: 0; pointer-events: none; transition: all 0.35s var(--ease-elastic);
+    }
+    .toast-card.show { transform: translateY(0) scale(1); opacity: 1; pointer-events: auto; }
+    .toast-icon { font-size: 1.3rem; }
+    .toast-title { font-weight: 700; font-size: 0.92rem; color: var(--text-primary); }
+    .toast-message { font-size: 0.78rem; color: var(--text-secondary); }
+
+    /* Footer */
+    .footer {
+      border-top: 1px solid var(--border-color);
+      padding: 1.8rem 0;
+      position: relative;
+      z-index: 10;
+      background: rgba(7, 9, 14, 0.85);
+    }
+    .footer-container {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+    .footer-brand {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 800;
+      color: var(--text-primary);
+    }
+
+    /* Wrap only on narrow mobile screens (< 768px) */
+    @media (max-width: 768px) {
+      .portals-grid {
+        flex-direction: column;
+        align-items: center;
+      }
+      .portal-card {
+        width: 100%;
+        max-width: 360px;
+      }
+      .hero-title {
+        margin-bottom: 2.5rem;
+      }
+    }
+  </style>
 </head>
 <body class="dark-theme">
   <!-- Interactive Particle Background Canvas -->
@@ -17,12 +506,11 @@
   <!-- Ambient Glow Blobs -->
   <div class="ambient-glow glow-1"></div>
   <div class="ambient-glow glow-2"></div>
-  <div class="ambient-glow glow-3"></div>
 
-  <!-- Particle Explosion & Shockwave VFX Container -->
+  <!-- VFX Container -->
   <div id="vfx-container" aria-hidden="true"></div>
 
-  <!-- Main Navigation -->
+  <!-- Navigation -->
   <header class="navbar">
     <div class="nav-container">
       <a href="#" class="brand-logo">
@@ -36,7 +524,6 @@
       </a>
 
       <div class="nav-controls">
-        <!-- Audio Synth Toggle -->
         <button id="sound-toggle" class="control-pill" title="Toggle Synthesizer Audio Effects" aria-label="Toggle Sound Effects">
           <span class="pill-icon sound-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -47,7 +534,6 @@
           <span class="pill-label">SFX: <span id="sound-status-text">ON</span></span>
         </button>
 
-        <!-- Theme Accent Switcher -->
         <button id="theme-accent-btn" class="control-pill accent-pill" title="Cycle Accent Palette" aria-label="Cycle Accent Color">
           <span class="color-dot"></span>
           <span class="pill-label">Aurora</span>
@@ -56,7 +542,7 @@
     </div>
   </header>
 
-  <!-- Main Content -->
+  <!-- Main Hero Section -->
   <main class="hero-section">
     <div class="hero-container">
       <!-- Main Headline -->
@@ -73,16 +559,13 @@
           <div class="button-stage">
             <a href="https://photos.evmancool.com" target="_blank" rel="noopener noreferrer" 
                class="btn-anim btn-mercury btn-mercury-photos magnetic-target" id="btn-photos" data-name="Photo Library" data-url="https://photos.evmancool.com">
-              <!-- Specular Light Reflection Follower -->
               <span class="mercury-glare"></span>
-              <!-- Fluid Wave SVG Container -->
               <div class="liquid-wave-wrap">
                 <div class="liquid-wave-bg"></div>
                 <svg class="liquid-wave-svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
                   <path d="M0,0 C150,90 350,-40 500,45 C650,130 900,10 1200,50 L1200,120 L0,120 Z"></path>
                 </svg>
               </div>
-              <!-- Button Content -->
               <span class="mercury-content">
                 <span class="mercury-icon">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -92,7 +575,6 @@
                   </svg>
                 </span>
                 <span class="mercury-text">PHOTOS</span>
-                <span class="mercury-badge">photos.evmancool.com</span>
               </span>
             </a>
           </div>
@@ -104,16 +586,13 @@
           <div class="button-stage">
             <a href="https://home.evmancool.com" target="_blank" rel="noopener noreferrer" 
                class="btn-anim btn-mercury btn-mercury-home magnetic-target" id="btn-home" data-name="Smart Home" data-url="https://home.evmancool.com">
-              <!-- Specular Light Reflection Follower -->
               <span class="mercury-glare"></span>
-              <!-- Fluid Wave SVG Container -->
               <div class="liquid-wave-wrap">
                 <div class="liquid-wave-bg"></div>
                 <svg class="liquid-wave-svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
                   <path d="M0,0 C150,90 350,-40 500,45 C650,130 900,10 1200,50 L1200,120 L0,120 Z"></path>
                 </svg>
               </div>
-              <!-- Button Content -->
               <span class="mercury-content">
                 <span class="mercury-icon">
                   <svg viewBox="0 0 24 24" fill="currentColor">
@@ -121,7 +600,6 @@
                   </svg>
                 </span>
                 <span class="mercury-text">SMART HOME</span>
-                <span class="mercury-badge">home.evmancool.com</span>
               </span>
             </a>
           </div>
@@ -133,16 +611,13 @@
           <div class="button-stage">
             <a href="https://jellyfin.evmancool.com" target="_blank" rel="noopener noreferrer" 
                class="btn-anim btn-mercury btn-mercury-jellyfin magnetic-target" id="btn-jellyfin" data-name="Jellyfin" data-url="https://jellyfin.evmancool.com">
-              <!-- Specular Light Reflection Follower -->
               <span class="mercury-glare"></span>
-              <!-- Fluid Wave SVG Container -->
               <div class="liquid-wave-wrap">
                 <div class="liquid-wave-bg"></div>
                 <svg class="liquid-wave-svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
                   <path d="M0,0 C150,90 350,-40 500,45 C650,130 900,10 1200,50 L1200,120 L0,120 Z"></path>
                 </svg>
               </div>
-              <!-- Button Content -->
               <span class="mercury-content">
                 <span class="mercury-icon">
                   <svg viewBox="0 0 24 24" fill="currentColor">
@@ -150,7 +625,6 @@
                   </svg>
                 </span>
                 <span class="mercury-text">JELLYFIN</span>
-                <span class="mercury-badge">jellyfin.evmancool.com</span>
               </span>
             </a>
           </div>
@@ -160,7 +634,7 @@
     </div>
   </main>
 
-  <!-- Minimal Toast Notification -->
+  <!-- Toast Notification -->
   <div id="toast-notification" class="toast-card" role="status" aria-live="polite">
     <div class="toast-icon" id="toast-icon">💎</div>
     <div class="toast-body">
